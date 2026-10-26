@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Masha Belyaeva</title>
 
-  <!-- Icon library for the social logos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
@@ -17,11 +16,24 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      position: relative;
       min-height: 100vh;
       background: #fff;
       color: #111;
       font-family: Georgia, "Times New Roman", serif;
     }
+
+    /* Per-letter blur effect (letters are wrapped by the script below) */
+    .word { white-space: nowrap; }
+    .ch {
+      display: inline-block;
+      cursor: default;
+      transition: filter 0.3s;
+    }
+    .ch:hover { filter: blur(3px); }
+
+    /* Smaller text gets a lighter blur so it stays readable */
+    .project .ch:hover { filter: blur(2px); }
 
     h1 {
       position: absolute;
@@ -41,7 +53,7 @@
       padding: 6rem 1.5rem;
     }
 
-    p {
+    main p {
       max-width: 38rem;
       font-size: 1.15rem;
       line-height: 1.7;
@@ -57,26 +69,50 @@
       color: #111;
       font-size: 1.8rem;
       text-decoration: none;
-      transition: opacity 0.2s;
     }
 
-    .links a:hover { opacity: 0.5; }
+    /* Project boxes, scattered around the page */
+    .project {
+      position: absolute;
+      width: 12rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid #111;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .project h2 {
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Move these around by changing the percentages */
+    .project-1 { top: 14%; right: 9%; }
+    .project-2 { top: 60%; left: 6%; }
+    .project-3 { top: 76%; right: 14%; }
+
+    /* On smaller screens, stack the boxes under the content */
+    @media (max-width: 900px) {
+      .project {
+        position: static;
+        width: auto;
+        margin: 0 1.5rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Masha Belyaeva</h1>
+  <h1 class="split">Masha Belyaeva</h1>
 
   <main>
     <p>
-      Type your paragraph here. Replace this text with whatever you want to say
-      about yourself, your work, or anything else.
+      Hello! My name is Masha. I am based out of the Bay Area and I enjoy most hobbies. Below are my socials and around are some projects I've worked on.
     </p>
 
     <div class="links">
-      <a href="https://www.linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <a href="https://www.linkedin.com/in/belyaeva1" target="_blank" rel="noopener" aria-label="LinkedIn">
         <i class="fa-brands fa-linkedin"></i>
       </a>
-      <a href="https://www.instagram.com/YOUR-USERNAME" target="_blank" rel="noopener" aria-label="Instagram">
+      <a href="https://www.instagram.com/mbelyaevaa" target="_blank" rel="noopener" aria-label="Instagram">
         <i class="fa-brands fa-instagram"></i>
       </a>
       <a href="https://github.com/belyaeva9300" target="_blank" rel="noopener" aria-label="GitHub">
@@ -84,5 +120,45 @@
       </a>
     </div>
   </main>
+
+  <div class="project project-1">
+    <h2 class="split">Project One</h2>
+    <p class="split">A short description of your first project.</p>
+  </div>
+
+  <div class="project project-2">
+    <h2 class="split">Project Two</h2>
+    <p class="split">A short description of your second project.</p>
+  </div>
+
+  <div class="project project-3">
+    <h2 class="split">Project Three</h2>
+    <p class="split">A short description of your third project.</p>
+  </div>
+
+  <script>
+    // Wrap every letter of each ".split" element in its own span
+    document.querySelectorAll(".split").forEach(el => {
+      const text = el.textContent.trim();
+      el.setAttribute("aria-label", text);
+      el.textContent = "";
+
+      text.split(/\s+/).forEach((word, i, words) => {
+        const wordSpan = document.createElement("span");
+        wordSpan.className = "word";
+        wordSpan.setAttribute("aria-hidden", "true");
+
+        [...word].forEach(letter => {
+          const ch = document.createElement("span");
+          ch.className = "ch";
+          ch.textContent = letter;
+          wordSpan.appendChild(ch);
+        });
+
+        el.appendChild(wordSpan);
+        if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
+      });
+    });
+  </script>
 </body>
 </html>
