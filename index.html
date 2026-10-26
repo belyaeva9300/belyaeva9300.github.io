@@ -16,11 +16,17 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      position: relative;
       min-height: 100vh;
       background: #fff;
       color: #111;
       font-family: Georgia, "Times New Roman", serif;
+    }
+
+    /* Top section: the scattered items are positioned inside this,
+       so adding content below doesn't shift them */
+    .hero {
+      position: relative;
+      min-height: 100vh;
     }
 
     /* Per-letter blur effect (letters are wrapped by the script below) */
@@ -111,6 +117,18 @@
       left: 6%;
     }
 
+    /* Image at the bottom of the page */
+    .finale {
+      display: flex;
+      justify-content: center;
+      padding: 4rem 1.5rem 6rem;
+    }
+    .finale img {
+      display: block;
+      width: min(32rem, 100%);
+      height: auto;
+    }
+
     /* On smaller screens: logos in a centered row near the top */
     @media (max-width: 900px) {
       .logos {
@@ -144,40 +162,46 @@
   </style>
 </head>
 <body>
-  <h1 class="split">Masha Belyaeva</h1>
+  <div class="hero">
+    <h1 class="split">Masha Belyaeva</h1>
 
-  <main>
-    <p>
-      Hello! My name is Masha. I am based out of the Bay Area and I enjoy most hobbies. Below are my socials and around are some projects I've worked on.
-    </p>
+    <main>
+      <p>
+        Hello! My name is Masha. I am based out of the Bay Area and I enjoy most hobbies. Below are my socials and around are some projects I've worked on.
+      </p>
 
-    <div class="links">
-      <a href="https://www.linkedin.com/in/belyaeva1" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <i class="fa-brands fa-linkedin"></i>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/belyaeva1" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="https://www.instagram.com/mbelyaevaa" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://github.com/belyaeva9300" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
+    </main>
+
+    <div class="logos">
+      <a class="logo-link logo-nasa" href="https://science.nasa.gov/get-involved/citizen-science/nasa-data-hackathon-inspires-community-action/" target="_blank" rel="noopener" aria-label="NASA Data Hackathon article">
+        <img src="images/nasa-logo.png" alt="NASA logo">
       </a>
-      <a href="https://www.instagram.com/mbelyaevaa" target="_blank" rel="noopener" aria-label="Instagram">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-      <a href="https://github.com/belyaeva9300" target="_blank" rel="noopener" aria-label="GitHub">
-        <i class="fa-brands fa-github"></i>
+
+      <a class="logo-link logo-2" href="https://xii.swamphacks.com/" target="_blank" rel="noopener" aria-label="Shxii">
+        <img src="images/shxii.png" alt="Shxii logo">
       </a>
     </div>
-  </main>
 
-  <div class="logos">
-    <a class="logo-link logo-nasa" href="https://science.nasa.gov/get-involved/citizen-science/nasa-data-hackathon-inspires-community-action/" target="_blank" rel="noopener" aria-label="NASA Data Hackathon article">
-      <img src="images/nasa-logo.png" alt="NASA logo">
-    </a>
-
-    <a class="logo-link logo-2" href="https://xii.swamphacks.com/" target="_blank" rel="noopener" aria-label="Shxii">
-      <img src="images/shxii.png" alt="Shxii logo">
-    </a>
+    <div class="project project-3">
+      <h2 class="split">Project Three</h2>
+      <p class="split">Will input later</p>
+    </div>
   </div>
 
-  <div class="project project-3">
-    <h2 class="split">Project Three</h2>
-    <p class="split">Will input later</p>
-  </div>
+  <section class="finale">
+    <img src="images/IMG_9129.webp" alt="Image">
+  </section>
 
   <script>
     // Wrap every letter of each ".split" element in its own span
@@ -208,20 +232,23 @@
     // Hover sounds from your own audio files
     const shimmer = new Audio("sounds/shimering.wav");
     const drum = new Audio("sounds/industrial-drum-loop.wav");
+    const alien = new Audio("sounds/alien.wav");
 
     shimmer.preload = "auto";
     drum.preload = "auto";
+    alien.preload = "auto";
     drum.loop = true;          // keeps playing while the mouse is on the logo
 
     shimmer.volume = 0.6;      // 0 to 1
     drum.volume = 0.6;
+    alien.volume = 0.6;
 
     // Browsers block sound until the visitor's first click, tap or keypress,
     // so the first hover after a fresh load may be silent. That's normal.
     function play(audio) {
       audio.currentTime = 0;
       const attempt = audio.play();
-      if (attempt) attempt.catch(() => {});
+      if (attempt) attempt.catch(err => console.error("Audio error:", audio.src, err));
     }
 
     function stop(audio) {
@@ -229,15 +256,34 @@
       audio.currentTime = 0;
     }
 
-    // NASA logo = shimmer (plays once)
+    // NASA logo = shimmer (stops when the mouse leaves)
     const nasa = document.querySelector(".logo-nasa");
     nasa.addEventListener("pointerenter", () => play(shimmer));
     nasa.addEventListener("pointerleave", () => stop(shimmer));
 
-    // Shxii logo = industrial drum loop (plays while hovered, stops on leave)
+    // Shxii logo = industrial drum loop (plays while hovered)
     const shxii = document.querySelector(".logo-2");
     shxii.addEventListener("pointerenter", () => play(drum));
     shxii.addEventListener("pointerleave", () => stop(drum));
+
+    // Bottom image = alien sound when the cursor gets near its center
+    const pic = document.querySelector(".finale img");
+    let nearCenter = false;
+
+    document.addEventListener("pointermove", e => {
+      const box = pic.getBoundingClientRect();
+      const cx = box.left + box.width / 2;
+      const cy = box.top + box.height / 2;
+      const distance = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+      // "Near" = within 35% of the image's smaller side from its center
+      const radius = Math.min(box.width, box.height) * 0.35;
+      const isNear = distance < radius;
+
+      if (isNear && !nearCenter) play(alien);
+      if (!isNear && nearCenter) stop(alien);
+      nearCenter = isNear;
+    });
   </script>
 </body>
 </html>
