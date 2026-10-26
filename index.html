@@ -232,6 +232,7 @@
     // NASA logo = shimmer (plays once)
     const nasa = document.querySelector(".logo-nasa");
     nasa.addEventListener("pointerenter", () => play(shimmer));
+    nasa.addEventListener("pointerleave", () => stop(shimmer));
 
     // Shxii logo = industrial drum loop (plays while hovered, stops on leave)
     const shxii = document.querySelector(".logo-2");
