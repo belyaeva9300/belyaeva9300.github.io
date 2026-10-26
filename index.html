@@ -90,6 +90,21 @@
     .project-2 { top: 60%; left: 6%; }
     .project-3 { top: 76%; right: 14%; }
 
+    .logo-link {
+        position: absolute;
+        top: 14%;
+        right: 9%;
+        display: block;
+        width: 6rem;
+    }
+        .logo-link img {
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s;
+    }
+    .logo-link:hover img { transform: scale(1.08); }
+
     /* On smaller screens, stack the boxes under the content */
     @media (max-width: 900px) {
       .project {
@@ -97,6 +112,11 @@
         width: auto;
         margin: 0 1.5rem 1rem;
       }
+      .logo-link {
+        position: static;
+        width: 5rem;
+        margin: 0 1.5rem 1rem;
+}
     }
   </style>
 </head>
@@ -121,10 +141,9 @@
     </div>
   </main>
 
-  <div class="project project-1">
-    <h2 class="split">Project One</h2>
-    <p class="split">A short description of your first project.</p>
-  </div>
+  <a class="logo-link" href="https://science.nasa.gov/get-involved/citizen-science/nasa-data-hackathon-inspires-community-action/" target="_blank" rel="noopener" aria-label="NASA Data Hackathon article">
+    <img src="images/nasa-logo.png" alt="NASA logo">
+  </a>
 
   <div class="project project-2">
     <h2 class="split">Project Two</h2>
