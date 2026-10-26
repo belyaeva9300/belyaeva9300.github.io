@@ -165,7 +165,7 @@
   </main>
 
   <div class="logos">
-    <a class="logo-link" href="https://science.nasa.gov/get-involved/citizen-science/nasa-data-hackathon-inspires-community-action/" target="_blank" rel="noopener" aria-label="NASA Data Hackathon article">
+    <a class="logo-link logo-nasa" href="https://science.nasa.gov/get-involved/citizen-science/nasa-data-hackathon-inspires-community-action/" target="_blank" rel="noopener" aria-label="NASA Data Hackathon article">
       <img src="images/nasa-logo.png" alt="NASA logo">
     </a>
 
@@ -202,6 +202,41 @@
         if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
       });
     });
+  </script>
+
+  <script>
+    // Hover sounds from your own audio files
+    const shimmer = new Audio("sounds/shimering.wav");
+    const drum = new Audio("sounds/industrial-drum.loop.wav");
+
+    shimmer.preload = "auto";
+    drum.preload = "auto";
+    drum.loop = true;          // keeps playing while the mouse is on the logo
+
+    shimmer.volume = 0.6;      // 0 to 1
+    drum.volume = 0.6;
+
+    // Browsers block sound until the visitor's first click, tap or keypress,
+    // so the first hover after a fresh load may be silent. That's normal.
+    function play(audio) {
+      audio.currentTime = 0;
+      const attempt = audio.play();
+      if (attempt) attempt.catch(() => {});
+    }
+
+    function stop(audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    // NASA logo = shimmer (plays once)
+    const nasa = document.querySelector(".logo-nasa");
+    nasa.addEventListener("pointerenter", () => play(shimmer));
+
+    // Shxii logo = industrial drum loop (plays while hovered, stops on leave)
+    const shxii = document.querySelector(".logo-2");
+    shxii.addEventListener("pointerenter", () => play(drum));
+    shxii.addEventListener("pointerleave", () => stop(drum));
   </script>
 </body>
 </html>
