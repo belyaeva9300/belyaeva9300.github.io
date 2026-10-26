@@ -1,112 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masha Belyaeva | Personal Website</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masha Belyaeva</title>
 
-        body {
-            background-color: #f8f9fa;
-            color: #212529;
-            line-height: 1.6;
-            padding: 40px 20px;
-        }
+  <!-- Icon library for the social logos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
+  <style>
+    @font-face {
+      font-family: "Gaussian Blur";
+      src: url("fonts/gaussian_blur/gaussian_blur/Gaussian%20Blur.ttf") format("truetype");
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        h1 {
-            font-size: 2.2rem;
-            color: #111;
-            margin-bottom: 8px;
-        }
+    body {
+      min-height: 100vh;
+      background: #fff;
+      color: #111;
+      font-family: Georgia, "Times New Roman", serif;
+    }
 
-        .subtitle {
-            color: #6c757d;
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
+    h1 {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      font-family: "Gaussian Blur", "Helvetica Neue", Arial, sans-serif;
+      font-size: 2rem;
+      font-weight: normal;
+    }
 
-        .bio {
-            margin-bottom: 30px;
-            font-size: 1.05rem;
-        }
+    main {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 1.5rem;
+    }
 
-        h2 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #f1f3f5;
-            padding-bottom: 5px;
-        }
+    p {
+      max-width: 38rem;
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
 
-        .links-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
+    .links {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1.75rem;
+    }
 
-        .links-list li {
-            margin-bottom: 10px;
-        }
+    .links a {
+      color: #111;
+      font-size: 1.8rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
 
-        .links-list a {
-            color: #0076ff;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .links-list a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #adb5bd;
-        }
-    </style>
+    .links a:hover { opacity: 0.5; }
+  </style>
 </head>
 <body>
+  <h1>Masha Belyaeva</h1>
 
-    <div class="container">
-        <header>
-            <h1>Masha Belyaeva</h1>
-            <p class="subtitle">Welcome to my personal corner of the internet</p>
-        </header>
+  <main>
+    <p>
+      Type your paragraph here. Replace this text with whatever you want to say
+      about yourself, your work, or anything else.
+    </p>
 
-        <section class="bio">
-            <h2>About Me</h2>
-            <p>Hi! I'm Masha. I just launched my custom domain and I am currently building out my brand new personal website using GitHub Pages. Stay tuned for updates!</p>
-        </section>
-
-        <section class="links">
-            <h2>Find Me Online</h2>
-            <ul class="links-list">
-                <li>🔗 <a href="https://github.com" target="_blank">GitHub Profile</a></li>
-                <li>💼 <a href="#" target="_blank">LinkedIn</a></li>
-                <li>📸 <a href="#" target="_blank">Instagram / Portfolio</a></li>
-            </ul>
-        </section>
-
+    <div class="links">
+      <a href="https://www.linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a href="https://www.instagram.com/YOUR-USERNAME" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://github.com/belyaeva9300" target="_blank" rel="noopener" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
     </div>
-
+  </main>
 </body>
 </html>
