@@ -71,7 +71,7 @@
       text-decoration: none;
     }
 
-    /* Project boxes, scattered around the page */
+    /* Project box, scattered around the page */
     .project {
       position: absolute;
       width: 12rem;
@@ -85,50 +85,61 @@
       margin-bottom: 0.35rem;
     }
 
-    /* Move these around by changing the percentages */
-    .project-1 { top: 14%; right: 9%; }
-    .project-2 { top: 60%; left: 6%; }
     .project-3 { top: 76%; right: 14%; }
 
+    /* Wrapper is invisible on desktop so logos keep their own positions */
+    .logos { display: contents; }
+
     .logo-link {
-        position: absolute;
-        top: 14%;
-        right: 9%;
-        display: block;
-        width: 6rem;
+      position: absolute;
+      top: 14%;
+      right: 9%;
+      display: block;
+      width: 6rem;
     }
-        .logo-link img {
-        display: block;
-        width: 100%;
-        height: auto;
-        transition: transform 0.3s;
+    .logo-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s;
     }
-    
     .logo-link:hover img { transform: scale(1.08); }
 
     .logo-2 {
-        top: 60%;
-        right: auto;
-        left: 6%;
+      top: 60%;
+      right: auto;
+      left: 6%;
     }
-    /* On smaller screens, stack the boxes under the content */
+
+    /* On smaller screens: logos in a centered row near the top */
     @media (max-width: 900px) {
+      .logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        position: absolute;
+        top: 5rem;
+        left: 0;
+        right: 0;
+      }
+
+      .logo-link {
+        position: static;
+        width: 5rem;
+        margin: 0;
+      }
+
+      /* Push the main content down so it doesn't sit under the logos */
+      main {
+        padding-top: 11rem;
+      }
+
       .project {
         position: static;
         width: auto;
         margin: 0 1.5rem 1rem;
       }
-      .logo-link {
-        position: static;
-        width: 5rem;
-        margin: 0 1.5rem 1rem;
-
-      .logo-2 {
-        top: auto;
-        left: auto;
-      }
-
-}
     }
   </style>
 </head>
@@ -153,13 +164,15 @@
     </div>
   </main>
 
-  <a class="logo-link" href="https://science.nasa.gov/get-involved/citizen-science/nasa-data-hackathon-inspires-community-action/" target="_blank" rel="noopener" aria-label="NASA Data Hackathon article">
-    <img src="images/nasa-logo.png" alt="NASA logo">
-  </a>
+  <div class="logos">
+    <a class="logo-link" href="https://science.nasa.gov/get-involved/citizen-science/nasa-data-hackathon-inspires-community-action/" target="_blank" rel="noopener" aria-label="NASA Data Hackathon article">
+      <img src="images/nasa-logo.png" alt="NASA logo">
+    </a>
 
-  <a class="logo-link logo-2" href="https://xii.swamphacks.com/" target="_blank" rel="noopener" aria-label="Shxii">
-    <img src="images/shxii.png" alt="Shxii logo">
-  </a>
+    <a class="logo-link logo-2" href="https://xii.swamphacks.com/" target="_blank" rel="noopener" aria-label="Shxii">
+      <img src="images/shxii.png" alt="Shxii logo">
+    </a>
+  </div>
 
   <div class="project project-3">
     <h2 class="split">Project Three</h2>
